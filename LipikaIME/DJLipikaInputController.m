@@ -157,20 +157,25 @@ extern IMKCandidates* candidates;
 #pragma mark - DJLipikaInputController's instance methods
 
 -(void)updateCandidates {
-    if ([DJLipikaUserSettings unfocusBehavior] == DJ_RESTORE_UNCOMMITTED
-            && numMyCompositionCommits < numCompositionCommits) {
-        numMyCompositionCommits = numCompositionCommits;
-        [manager flush];
-    }
-    if ([manager hasOutput]) {
-        if (candidates) {
-            [candidates updateCandidates];
-            [candidates show:kIMKLocateCandidatesBelowHint];
-        }
-    }
-    else {
-        [candidates hide];
-    }
+    NSRect tempRect = NSMakeRect(0, 0, 0, 0);
+    NSDictionary* clientData = [[self client] attributesForCharacterIndex:0 lineHeightRectangle:&tempRect];
+    NSLog(@"%@", clientData);
+    NSLog(@"x:%f; y: %f; height: %f; width: %f", tempRect.origin.x, tempRect.origin.y, tempRect.size.height, tempRect.size.width);
+
+//    if ([DJLipikaUserSettings unfocusBehavior] == DJ_RESTORE_UNCOMMITTED
+//            && numMyCompositionCommits < numCompositionCommits) {
+//        numMyCompositionCommits = numCompositionCommits;
+//        [manager flush];
+//    }
+//    if ([manager hasOutput]) {
+//        if (candidates) {
+//            [candidates updateCandidates];
+//            [candidates show:kIMKLocateCandidatesBelowHint];
+//        }
+//    }
+//    else {
+//        [candidates hide];
+//    }
 }
 
 -(void)changeInputScheme:(NSMenuItem*)menuItem {
