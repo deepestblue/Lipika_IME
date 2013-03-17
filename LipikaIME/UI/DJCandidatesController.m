@@ -16,9 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "DJLipikaCandidate.h"
+#import "DJCandidatesController.h"
+#import "DJLipikaUserSettings.h"
 
-@implementation DJLipikaCandidate
+@implementation DJCandidatesController
 
 -(id)initWithController:(DJLipikaInputController *)aController {
     self = [super init];
@@ -29,7 +30,22 @@
     return self;
 }
 
--(void)showWithInput:(NSString *)input candidates:(NSArray *)candidates attributes:(NSDictionary *)attributes {
+-(NSWindow*)createWindowWithAttributes:(NSDictionary *)attributes frame:(NSRect)rect {
+    rect.size.height = [[attributes valueForKey:@"IMKLineHeight"] doubleValue];
+    rect.size.width = 100.0;
+    NSWindow* mainWindow = [[NSWindow alloc] initWithContentRect:rect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+    [mainWindow setBackgroundColor:[NSColor blueColor]];
+    NSTextField* input = [[NSTextField alloc] initWithFrame:rect];
+    [input setBordered:NO];
+    [input setBezeled:NO];
+    NSColor* background = [[DJLipikaUserSettings backgroundColor] colorWithAlphaComponent:[DJLipikaUserSettings opacity]];
+    [input setBackgroundColor:background];
+    [mainWindow setContentView:input];
+    mainWindow.collectionBehavior = (NSWindowCollectionBehaviorTransient | NSWindowCollectionBehaviorIgnoresCycle);
+    return mainWindow;
+}
+
+-(void)showWithInput:(NSString *)input candidates:(NSArray *)candidates attributes:(NSDictionary *)attributes frame:(NSRect)rect {
     /*
      {
      IMKBaseline = "NSPoint: {1097, 73}";
@@ -39,7 +55,11 @@
      NSFont = "\"LucidaGrande 13.00 pt. P [] (0x7fd29bc80640) fobj=0x7fd29bc2d8e0, spc=4.11\"";
      }
      */
-
+    if (input == nil || attributes == nil) return;
+    if (!inputWindow) inputWindow = [self createWindowWithAttributes:attributes frame:rect];
+    [[inputWindow contentView] setStringValue:input];
+    [inputWindow orderFrontRegardless];
+    [inputWindow makeKeyWindow];
 }
 
 -(void)hide {

@@ -17,7 +17,7 @@
 	<key>LoggingLevel</key>
 	<string>Warning</string>
 	<key>BackspaceDeletes</key>
-	<string>Output character</string>
+	<string>Input character</string>
 	<key>OnUnfocusUncommitted</key>
 	<string>Automatically commits</string>
 </dict>

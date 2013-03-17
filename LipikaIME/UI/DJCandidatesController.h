@@ -16,15 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <Foundation/Foundation.h>
-#import "DJLipikaInputController.h"
+#import <Cocoa/Cocoa.h>
 
-@interface DJLipikaCandidate : NSObject {
+@class DJLipikaInputController;
+
+@interface DJCandidatesController : NSObject {
     DJLipikaInputController* controller;
+    NSWindow* inputWindow;
+    NSWindow* candidateWindow;
 }
 
 -(id)initWithController:(DJLipikaInputController*)aController;
--(void)showWithInput:(NSString*)input candidates:(NSArray*)candidates attributes:(NSDictionary*)attributes;
+-(void)showWithInput:(NSString*)input candidates:(NSArray*)candidates attributes:(NSDictionary*)attributes frame:(NSRect)rect;
 -(void)hide;
 
 @end

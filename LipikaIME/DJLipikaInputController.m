@@ -18,6 +18,7 @@
 
 #import "DJLipikaInputController.h"
 #import "DJLipikaUserSettings.h"
+#import "DJCandidatesController.h"
 #import "DJPreferenceController.h"
 #import "Constants.h"
 
@@ -42,6 +43,7 @@ extern IMKCandidates* candidates;
     [candidates setDismissesAutomatically:NO];
     [DJPreferenceController configureCandidates];
     numMyCompositionCommits = 0;
+    myCandidates = [[DJCandidatesController alloc] initWithController:self];
     return self;
 }
 
@@ -159,9 +161,7 @@ extern IMKCandidates* candidates;
 -(void)updateCandidates {
     NSRect tempRect = NSMakeRect(0, 0, 0, 0);
     NSDictionary* clientData = [[self client] attributesForCharacterIndex:0 lineHeightRectangle:&tempRect];
-    NSLog(@"%@", clientData);
-    NSLog(@"x:%f; y: %f; height: %f; width: %f", tempRect.origin.x, tempRect.origin.y, tempRect.size.height, tempRect.size.width);
-
+    [myCandidates showWithInput:[manager input] candidates:[NSArray arrayWithObject:@"asldkfjds"] attributes:clientData frame:tempRect];
 //    if ([DJLipikaUserSettings unfocusBehavior] == DJ_RESTORE_UNCOMMITTED
 //            && numMyCompositionCommits < numCompositionCommits) {
 //        numMyCompositionCommits = numCompositionCommits;
