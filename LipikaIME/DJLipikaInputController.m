@@ -30,8 +30,6 @@ static long numCompositionCommits = 0;
 
 @implementation DJLipikaInputController
 
-extern IMKCandidates* candidates;
-
 #pragma mark - Overridden methods of IMKInputController
 
 -(id)initWithServer:(IMKServer*)server delegate:(id)delegate client:(id)inputClient {
@@ -40,7 +38,6 @@ extern IMKCandidates* candidates;
         return self;
     }
     manager = [[DJLipikaBufferManager alloc] init];
-    [candidates setDismissesAutomatically:NO];
     [DJPreferenceController configureCandidates];
     numMyCompositionCommits = 0;
     myCandidates = [[DJCandidatesController alloc] initWithController:self];
@@ -50,7 +47,7 @@ extern IMKCandidates* candidates;
 -(void)candidateSelected:(NSAttributedString*)candidateString {
     [[self client] insertText:candidateString replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     [manager flush];
-    [candidates hide];
+    [myCandidates hide];
 }
 
 -(NSMenu*)menu {
@@ -96,7 +93,7 @@ extern IMKCandidates* candidates;
     }
     else if (aSelector == @selector(cancelOperation:)) {
         [manager flush];
-        [candidates hide];
+        [myCandidates hide];
         return YES;
     }
     else {
@@ -114,7 +111,7 @@ extern IMKCandidates* candidates;
 -(void)activateServer:(id)sender {
     if ([DJLipikaUserSettings unfocusBehavior] == DJ_RESTORE_UNCOMMITTED) {
         // Activate sometimes gets called before deactivate
-        [candidates hide];
+        [myCandidates hide];
         // updateCandidates on the next run-loop
         // IMK needs to do its thing on the current run-loop
         [self performSelector:@selector(updateCandidates) withObject:self afterDelay:0];
@@ -130,7 +127,7 @@ extern IMKCandidates* candidates;
         [manager flush];
     }
     else if ([DJLipikaUserSettings unfocusBehavior] == DJ_RESTORE_UNCOMMITTED) {
-        [candidates hide];
+        [myCandidates hide];
     }
 }
 
@@ -159,23 +156,19 @@ extern IMKCandidates* candidates;
 #pragma mark - DJLipikaInputController's instance methods
 
 -(void)updateCandidates {
-    NSRect tempRect = NSMakeRect(0, 0, 0, 0);
-    NSDictionary* clientData = [[self client] attributesForCharacterIndex:0 lineHeightRectangle:&tempRect];
-    [myCandidates showWithInput:[manager input] candidates:[NSArray arrayWithObject:@"asldkfjds"] attributes:clientData frame:tempRect];
-//    if ([DJLipikaUserSettings unfocusBehavior] == DJ_RESTORE_UNCOMMITTED
-//            && numMyCompositionCommits < numCompositionCommits) {
-//        numMyCompositionCommits = numCompositionCommits;
-//        [manager flush];
-//    }
-//    if ([manager hasOutput]) {
-//        if (candidates) {
-//            [candidates updateCandidates];
-//            [candidates show:kIMKLocateCandidatesBelowHint];
-//        }
-//    }
-//    else {
-//        [candidates hide];
-//    }
+    if ([DJLipikaUserSettings unfocusBehavior] == DJ_RESTORE_UNCOMMITTED
+            && numMyCompositionCommits < numCompositionCommits) {
+        numMyCompositionCommits = numCompositionCommits;
+        [manager flush];
+    }
+    if ([manager hasOutput]) {
+        NSRect rect = NSMakeRect(0, 0, 0, 0);
+        NSDictionary* clientData = [[self client] attributesForCharacterIndex:0 lineHeightRectangle:&rect];
+        [myCandidates showWithInput:[manager input] candidates:[NSArray arrayWithObject:@"asldkfjds"] attributes:clientData frame:rect];
+    }
+    else {
+        [myCandidates hide];
+    }
 }
 
 -(void)changeInputScheme:(NSMenuItem*)menuItem {
@@ -206,7 +199,7 @@ extern IMKCandidates* candidates;
     if (commitString) {
         [[self client] insertText:commitString replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
-    [candidates hide];
+    [myCandidates hide];
 }
 
 @end

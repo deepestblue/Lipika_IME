@@ -17,17 +17,13 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "DJInputWindow.h"
 
-@class DJLipikaInputController;
-
-@interface DJCandidatesController : NSObject {
-    DJLipikaInputController* controller;
-    DJInputWindow* inputWindow;
+@interface DJInputWindow : NSWindow {
+    NSTextField* inputField;
 }
 
--(id)initWithController:(DJLipikaInputController*)aController;
--(void)showWithInput:(NSString*)input candidates:(NSArray*)candidates attributes:(NSDictionary*)attributes frame:(NSRect)rect;
--(void)hide;
+@property NSTextField* inputField;
+
++(DJInputWindow*)windowWithAttributes:(NSDictionary*)attributes frame:(NSRect)rect;
 
 @end

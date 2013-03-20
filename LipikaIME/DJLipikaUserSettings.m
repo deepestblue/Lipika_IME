@@ -33,38 +33,14 @@
     [[NSUserDefaults standardUserDefaults] setObject:schemeName forKey:DEFAULT_SCHEME_NAME_KEY];
 }
 
-+(NSString*)candidateFontName {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:DEFAULT_FONT_NAME_KEY];
++(NSDictionary*)inputAttributes {
+    // TODO
+    return [NSDictionary dictionary];
 }
 
-+(float)candidateFontSize {
-    return [[NSUserDefaults standardUserDefaults] floatForKey:DEFAULT_FONT_SIZE_KEY];
-}
-
-+(NSFont*)candidateFont {
-    NSString* fontName = [[NSUserDefaults standardUserDefaults] stringForKey:DEFAULT_FONT_NAME_KEY];
-    float fontSize = [[NSUserDefaults standardUserDefaults] floatForKey:DEFAULT_FONT_SIZE_KEY];
-    return [NSFont fontWithName:fontName size:fontSize];
-}
-
-+(NSColor*)fontColor {
-    NSColor* color = [NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_FONT_COLOR_KEY]];
-    if (color) {
-        return color;
-    }
-    else {
-        return [NSColor blackColor];
-    }
-}
-
-+(NSColor*)backgroundColor {
-    NSColor* color = [NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_BACKGROUND_KEY]];
-    if (color) {
-        return color;
-    }
-    else {
-        return [NSColor whiteColor];
-    }
++(NSDictionary*)candidateAttributes {
+    // TODO
+    return [NSDictionary dictionary];
 }
 
 +(float)opacity {

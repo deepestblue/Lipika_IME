@@ -53,6 +53,7 @@
 		A5CD9F1816EC01EC0024A20A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CD9EE116EBFECA0024A20A /* Constants.m */; };
 		A5CD9F1916EC02090024A20A /* DJLipikaUserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CD9EEA16EBFEED0024A20A /* DJLipikaUserSettings.m */; };
 		A5CD9F1A16EC02300024A20A /* DJLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CD9EEC16EBFEED0024A20A /* DJLogger.m */; };
+		A5E2FC8A16F6A46800B89D5F /* DJInputWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2FC8916F6A46800B89D5F /* DJInputWindow.m */; };
 		E93074B70A5C264700470842 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93074B60A5C264700470842 /* InputMethodKit.framework */; };
 		E999E1590BE8D77E00CAE01B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E999E1580BE8D77E00CAE01B /* README.md */; };
 /* End PBXBuildFile section */
@@ -126,6 +127,8 @@
 		A5CD9F0A16EC01230024A20A /* TestMultipleReplay.scm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestMultipleReplay.scm; path = Schemes/TestMultipleReplay.scm; sourceTree = "<group>"; };
 		A5CD9F0B16EC01230024A20A /* TestNestedClass.scm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestNestedClass.scm; path = Schemes/TestNestedClass.scm; sourceTree = "<group>"; };
 		A5CD9F0C16EC01230024A20A /* TestSpecialChars.scm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TestSpecialChars.scm; path = Schemes/TestSpecialChars.scm; sourceTree = "<group>"; };
+		A5E2FC8816F6A46800B89D5F /* DJInputWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJInputWindow.h; path = LipikaIME/UI/DJInputWindow.h; sourceTree = "<group>"; };
+		A5E2FC8916F6A46800B89D5F /* DJInputWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJInputWindow.m; path = LipikaIME/UI/DJInputWindow.m; sourceTree = "<group>"; };
 		E93074B60A5C264700470842 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = /System/Library/Frameworks/InputMethodKit.framework; sourceTree = "<absolute>"; };
 		E999E1580BE8D77E00CAE01B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -251,6 +254,8 @@
 		A51CAA6516F4E863006B0969 /* UI Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A5E2FC8816F6A46800B89D5F /* DJInputWindow.h */,
+				A5E2FC8916F6A46800B89D5F /* DJInputWindow.m */,
 				A51CAA6616F4E90C006B0969 /* DJCandidatesController.h */,
 				A51CAA6716F4E90C006B0969 /* DJCandidatesController.m */,
 				A51CAA6816F4E90C006B0969 /* DJPreferenceController.h */,
@@ -450,6 +455,7 @@
 				A5CD9F0516EBFF170024A20A /* DJParseTreeNode.m in Sources */,
 				A51CAA6A16F4E90C006B0969 /* DJCandidatesController.m in Sources */,
 				A51CAA6B16F4E90C006B0969 /* DJPreferenceController.m in Sources */,
+				A5E2FC8A16F6A46800B89D5F /* DJInputWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

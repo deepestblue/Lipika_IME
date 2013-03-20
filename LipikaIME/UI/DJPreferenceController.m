@@ -64,10 +64,7 @@
     // Configure Candidate window
     NSMutableDictionary* attributes = [[NSMutableDictionary alloc] initWithCapacity:5];
     [attributes setValue:[NSNumber numberWithBool:YES] forKey:(NSString*)IMKCandidatesSendServerKeyEventFirst];
-    [attributes setValue:[DJLipikaUserSettings candidateFont] forKey:NSFontAttributeName];
     [attributes setValue:[NSNumber numberWithFloat:[DJLipikaUserSettings opacity]] forKey:(NSString*)IMKCandidatesOpacityAttributeName];
-    [attributes setValue:[DJLipikaUserSettings fontColor] forKey:NSForegroundColorAttributeName];
-    [attributes setValue:[DJLipikaUserSettings backgroundColor] forKey:NSBackgroundColorDocumentAttribute];
     [candidates setAttributes:attributes];
 }
 

@@ -23,12 +23,10 @@
 
 +(NSString*)schemeName;
 +(void)setSchemeName:(NSString*)schemeName;
-+(NSString*)candidateFontName;
-+(float)candidateFontSize;
-+(NSFont*)candidateFont;
-+(NSColor*)fontColor;
-+(NSColor*)backgroundColor;
++(NSDictionary*)candidateAttributes;
++(NSDictionary*)inputAttributes;
 +(float)opacity;
+
 +(void)reset;
 
 +(enum DJLogLevel)loggingLevel;

@@ -18,8 +18,12 @@
 
 #import "DJCandidatesController.h"
 #import "DJLipikaUserSettings.h"
+#import "DJInputWindow.h"
+#import <InputMethodKit/InputMethodKit.h>
 
 @implementation DJCandidatesController
+
+extern IMKCandidates* candidates;
 
 -(id)initWithController:(DJLipikaInputController *)aController {
     self = [super init];
@@ -27,25 +31,11 @@
         return self;
     }
     controller = aController;
+    [candidates setDismissesAutomatically:NO];
     return self;
 }
 
--(NSWindow*)createWindowWithAttributes:(NSDictionary *)attributes frame:(NSRect)rect {
-    rect.size.height = [[attributes valueForKey:@"IMKLineHeight"] doubleValue];
-    rect.size.width = 100.0;
-    NSWindow* mainWindow = [[NSWindow alloc] initWithContentRect:rect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-    [mainWindow setBackgroundColor:[NSColor blueColor]];
-    NSTextField* input = [[NSTextField alloc] initWithFrame:rect];
-    [input setBordered:NO];
-    [input setBezeled:NO];
-    NSColor* background = [[DJLipikaUserSettings backgroundColor] colorWithAlphaComponent:[DJLipikaUserSettings opacity]];
-    [input setBackgroundColor:background];
-    [mainWindow setContentView:input];
-    mainWindow.collectionBehavior = (NSWindowCollectionBehaviorTransient | NSWindowCollectionBehaviorIgnoresCycle);
-    return mainWindow;
-}
-
--(void)showWithInput:(NSString *)input candidates:(NSArray *)candidates attributes:(NSDictionary *)attributes frame:(NSRect)rect {
+-(void)showWithInput:(NSString*)input candidates:(NSArray *)candidates attributes:(NSDictionary*)attributes frame:(NSRect)rect {
     /*
      {
      IMKBaseline = "NSPoint: {1097, 73}";
@@ -55,15 +45,21 @@
      NSFont = "\"LucidaGrande 13.00 pt. P [] (0x7fd29bc80640) fobj=0x7fd29bc2d8e0, spc=4.11\"";
      }
      */
-    if (input == nil || attributes == nil) return;
-    if (!inputWindow) inputWindow = [self createWindowWithAttributes:attributes frame:rect];
-    [[inputWindow contentView] setStringValue:input];
+    if (input == nil || attributes == nil) {
+        [self hide];
+        return;
+    }
+    if (!inputWindow) inputWindow = [DJInputWindow windowWithAttributes:attributes frame:rect];
+    NSAttributedString* displayString = [[NSAttributedString alloc] initWithString:input attributes:[DJLipikaUserSettings inputAttributes]];
+    rect.size = [displayString size];
+    [inputWindow setFrame:rect display:NO];
+    [[inputWindow inputField] setAttributedStringValue:displayString];
     [inputWindow orderFrontRegardless];
-    [inputWindow makeKeyWindow];
 }
 
 -(void)hide {
-    
+    [inputWindow orderOut:self];
+    [candidates hide];
 }
 
 @end
