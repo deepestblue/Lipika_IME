@@ -30,6 +30,6 @@
 -(void)configureCandiates;
 -(void)configureInput;
 -(NSDictionary*)inputAttributes;
--(NSDictionary*)candidateStringAttributes;
+-(NSDictionary*)candidateAttributes;
 
 @end

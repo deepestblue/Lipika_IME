@@ -58,9 +58,6 @@
 }
 
 -(void)configureCandiates {
-    extern IMKCandidates* candidates;
-    [candidates setDismissesAutomatically:NO];
-    [candidates setAttributes:[DJLipikaUserSettings candidateWindowAttributes]];
     candidateAttributes = [DJLipikaUserSettings candidateStringAttributes];
 }
 
@@ -73,7 +70,7 @@
     return inputAttributes;
 }
 
--(NSDictionary *)candidateStringAttributes {
+-(NSDictionary *)candidateAttributes {
     return candidateAttributes;
 }
 

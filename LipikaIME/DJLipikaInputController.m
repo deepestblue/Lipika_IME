@@ -37,7 +37,7 @@ static long numCompositionCommits = 0;
         return self;
     }
     manager = [[DJLipikaBufferManager alloc] init];
-    candidates = [[DJLipikaCandidates alloc] initWithController:self];
+    candidates = [[DJCandidateController alloc] initWithController:self];
     numMyCompositionCommits = 0;
     return self;
 }

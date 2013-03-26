@@ -42,13 +42,6 @@
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"CandidateTextType"];
 }
 
-+(NSDictionary*)candidateWindowAttributes {
-    NSMutableDictionary* windowAttributes = [[NSMutableDictionary alloc] initWithCapacity:2];
-    [windowAttributes setValue:[NSNumber numberWithFloat:[DJLipikaUserSettings opacity]] forKey:@"IMKCandidatesOpacityAttributeName"];
-    [windowAttributes setValue:[NSNumber numberWithBool:YES] forKey:@"IMKCandidatesSendServerKeyEventFirst"];
-    return windowAttributes;
-}
-
 +(NSDictionary*)candidateStringAttributes {
     NSData* data = [[NSUserDefaults standardUserDefaults] objectForKey:@"CandidatesStringAttributes"];
     NSMutableDictionary* attributes;

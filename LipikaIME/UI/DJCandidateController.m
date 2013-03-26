@@ -16,14 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import "DJLipikaCandidates.h"
+#import "DJCandidateController.h"
 #import "DJLipikaInputController.h"
 #import "DJLipikaAppDelegate.h"
 #import "DJLipikaUserSettings.h"
 
-extern IMKCandidates* candidates;
-
-@implementation DJLipikaCandidates
+@implementation DJCandidateController
 
 -(id)initWithController:(DJLipikaInputController*)myController {
     self = [super init];
@@ -31,6 +29,7 @@ extern IMKCandidates* candidates;
         return self;
     }
     controller = myController;
+    window = [[DJCandidateWindow alloc] init];
     return self;
 }
 
@@ -49,7 +48,7 @@ extern IMKCandidates* candidates;
         inputString = [[NSAttributedString alloc] initWithString:input attributes:attributes];
     }
     if (output) {
-        outputString = [[NSAttributedString alloc] initWithString:output attributes:[[NSApp delegate] candidateStringAttributes]];
+        outputString = [[NSAttributedString alloc] initWithString:output attributes:[[NSApp delegate] candidateAttributes]];
     }
     NSAttributedString* forCandidate;
     NSAttributedString* forInput;
@@ -73,16 +72,16 @@ extern IMKCandidates* candidates;
         [[controller client] setMarkedText:forInput selectionRange:NSMakeRange([forInput length], 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
     }
     if (forCandidate) {
-        [candidates setCandidateData:[NSArray arrayWithObjects:forCandidate, nil]];
-    }
-    if ([DJLipikaUserSettings isShowCandidateWindow]) {
-        [candidates show:kIMKLocateCandidatesBelowHint];
+        [window setCandidateData:forCandidate];
+        if ([DJLipikaUserSettings isShowCandidateWindow]) {
+            [window show];
+        }
     }
 }
 
 -(void)hide {
     [[controller client] setMarkedText:@"" selectionRange:NSMakeRange(0, 0) replacementRange:NSMakeRange(NSNotFound, NSNotFound)];
-    [candidates hide];
+    [window hide];
 }
 
 @end

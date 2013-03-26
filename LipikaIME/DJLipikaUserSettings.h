@@ -26,7 +26,7 @@
 +(enum DJCandidateWindowText) candidateTextType;
 +(NSDictionary*)candidateStringAttributes;
 +(void)setCandidateStringAttributes:(NSDictionary*)attributes;
-+(NSDictionary*)candidateWindowAttributes;
++(float)opacity;
 +(NSDictionary*)inputAttributes;
 +(void)setInputAttributes:(NSDictionary*)attributes;
 

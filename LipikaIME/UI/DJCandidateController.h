@@ -16,15 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#import <Cocoa/Cocoa.h>
 #import <InputMethodKit/InputMethodKit.h>
-#import "DJLipikaBufferManager.h"
-#import "DJCandidateController.h"
+#import "DJCandidateWindow.h"
 
-@interface DJLipikaInputController : IMKInputController {
-    DJLipikaBufferManager* manager;
-    long numMyCompositionCommits;
-    DJCandidateController* candidates;
+@class DJLipikaInputController;
+
+@interface DJCandidateController : NSObject {
+    DJCandidateWindow* window;
+    DJLipikaInputController* controller;
 }
+
+-(id)initWithController:(DJLipikaInputController*)controller;
+-(void)showCandidateWithInput:(NSString*)input output:(NSString*)output;
+-(void)hide;
 
 @end
